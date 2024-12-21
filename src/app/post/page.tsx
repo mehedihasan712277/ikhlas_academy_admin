@@ -14,6 +14,7 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import axios from "axios";
+import PopUp from "@/components/ui/PopUp";
 // import AllProducts from "@/components/ui/AllProducts";
 
 function extractTextFromHTML(html: any) {
@@ -57,75 +58,82 @@ export default function Home() {
     };
 
     return (
-        <div className="p-4">
-            <div className="max-w-3xl mx-auto py-5">
-                <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)}>
-                        {/* Name Field */}
-                        <FormField
-                            control={form.control}
-                            name="name"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Name</FormLabel>
-                                    <br />
-                                    <FormControl>
-                                        <input
-                                            type="text"
-                                            className="bg-slate-200 rounded-sm p-2"
-                                            placeholder="Enter name"
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-
-                        {/* Image URL Field */}
-                        <FormField
-                            control={form.control}
-                            name="imgUrl"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Image URL</FormLabel>
-                                    <br />
-                                    <FormControl>
-                                        <input
-                                            type="url"
-                                            className="bg-slate-200 rounded-sm p-2"
-                                            placeholder="Enter image URL"
-                                            {...field}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-
-                        {/* Description Field with RichTextEditor */}
-                        <FormField
-                            control={form.control}
-                            name="description"
-                            render={({ field }) => (
-                                <FormItem>
-                                    <FormLabel>Description</FormLabel>
-                                    <FormControl>
-                                        <RichTextEditor
-                                            content={field.value}
-                                            onChange={(value: any) => field.onChange(value)}
-                                        />
-                                    </FormControl>
-                                    <FormMessage />
-                                </FormItem>
-                            )}
-                        />
-
-                        <Button className="mt-4">Submit</Button>
-                    </form>
-                </Form>
+        <>
+            <PopUp></PopUp>
+            <div>
+                <span>Upload image to get url </span>
+                <Button className="ml-4">Upload</Button>
             </div>
-            {/* <AllProducts></AllProducts> */}
-        </div>
+            <div className="p-4">
+                <div className="max-w-3xl mx-auto py-5">
+                    <Form {...form}>
+                        <form onSubmit={form.handleSubmit(onSubmit)}>
+                            {/* Name Field */}
+                            <FormField
+                                control={form.control}
+                                name="name"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Name</FormLabel>
+                                        <br />
+                                        <FormControl>
+                                            <input
+                                                type="text"
+                                                className="bg-slate-200 rounded-sm p-2"
+                                                placeholder="Enter name"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+                            {/* Image URL Field */}
+                            <FormField
+                                control={form.control}
+                                name="imgUrl"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Image URL</FormLabel>
+                                        <br />
+                                        <FormControl>
+                                            <input
+                                                type="url"
+                                                className="bg-slate-200 rounded-sm p-2"
+                                                placeholder="Enter image URL"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+                            {/* Description Field with RichTextEditor */}
+                            <FormField
+                                control={form.control}
+                                name="description"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Description</FormLabel>
+                                        <FormControl>
+                                            <RichTextEditor
+                                                content={field.value}
+                                                onChange={(value: any) => field.onChange(value)}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+
+                            <Button className="mt-4">Submit</Button>
+                        </form>
+                    </Form>
+                </div>
+                {/* <AllProducts></AllProducts> */}
+            </div>
+        </>
     );
 }
