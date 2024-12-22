@@ -15,6 +15,8 @@ import {
 } from "@/components/ui/form";
 import axios from "axios";
 import PopUp from "@/components/ui/PopUp";
+import { useContext, useState } from "react";
+import { AuthContext } from "@/components/shared/AuthProvider";
 // import AllProducts from "@/components/ui/AllProducts";
 
 function extractTextFromHTML(html: any) {
@@ -37,7 +39,14 @@ const formSchema = z.object({
     ),
 });
 
-export default function Home() {
+const AddPage = () => {
+    const authContext = useContext(AuthContext)
+    if (!authContext) {
+        // Handle the case where AuthContext is null
+        throw new Error("AuthContext must be used within an AuthProvider");
+    }
+    const { value, changeValue } = authContext
+
     const form = useForm({
         mode: "onTouched",
         resolver: zodResolver(formSchema),
@@ -59,10 +68,13 @@ export default function Home() {
 
     return (
         <>
-            <PopUp></PopUp>
+            <div className={value ? "block" : "hidden"}>
+                <PopUp></PopUp>
+            </div>
+
             <div>
                 <span>Upload image to get url </span>
-                <Button className="ml-4">Upload</Button>
+                <Button className="ml-4" onClick={() => changeValue()}>Upload</Button>
             </div>
             <div className="p-4">
                 <div className="max-w-3xl mx-auto py-5">
@@ -137,3 +149,5 @@ export default function Home() {
         </>
     );
 }
+
+export default AddPage;
